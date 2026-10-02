@@ -4,9 +4,7 @@ Expected program output, typed out from the screenshots in Section 4 of [the bri
 "Matching I/O" is worth 1 mark in each of a, b, c and d, so our output should match these files
 word for word.
 
-> **Not verified yet.** These were transcribed from the PDF images. Spacing may be off, especially
-> inside `grade =   P` and `GRADE:  C`. Check against the PDF before relying on exact spaces.
-> Once checked, delete this note.
+Checked against the PDF by Neo on 2026-10-02.
 
 | File | Scenario | Brief page | Owner |
 |---|---|---|---|
