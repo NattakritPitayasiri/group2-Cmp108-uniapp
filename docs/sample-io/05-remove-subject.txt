@@ -1,0 +1,14 @@
+                Student Course Menu (c/e/r/s/x): r
+                Remove Subject by ID: 541
+                Droping Subject-541
+                You are now enrolled in 3 out of 4 subjects
+                Student Course Menu (c/e/r/s/x): s
+                Showing 3 subjects
+                [ Subject::455 -- mark = 57 -- grade =   P ]
+                [ Subject::742 -- mark = 55 -- grade =   P ]
+                [ Subject::097 -- mark = 85 -- grade =  HD ]
+                Student Course Menu (c/e/r/s/x): e
+                Enrolling in Subject-764
+                You are now enrolled in 4 out of 4 subjects
+                Student Course Menu (c/e/r/s/x): e
+                Students are allowed to enrol in 4 subjects only

@@ -1,0 +1,13 @@
+University System: (A)dmin, (S)tudent, or X : A
+        Admin System (c/g/p/r/s/x): s
+        Student List
+        John Smith :: 673358 --> Email: john.smith@university.com
+        Alen Jones :: 762740 --> Email: alen.jones@university.com
+        Admin System (c/g/p/r/s/x): g
+        Grade Grouping
+        P  --> [Alen Jones :: 762740 --> GRADE:  P - MARK: 63.50]
+        C  --> [John Smith :: 673358 --> GRADE:  C - MARK: 68.25]
+        Admin System (c/g/p/r/s/x): p
+        PASS/FAIL Partition
+        FAIL --> []
+        PASS --> [John Smith :: 673358 --> GRADE:  C - MARK: 68.25, Alen Jones :: 762740 --> GRADE:  P - MARK: 63.50]

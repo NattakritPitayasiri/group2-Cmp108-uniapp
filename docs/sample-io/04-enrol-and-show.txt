@@ -1,0 +1,31 @@
+                Student Course Menu (c/e/r/s/x): s
+                Showing 0 subjects
+                Student Course Menu (c/e/r/s/x): e
+                Enrolling in Subject-541
+                You are now enrolled in 1 out of 4 subjects
+                Student Course Menu (c/e/r/s/x): e
+                Enrolling in Subject-455
+                You are now enrolled in 2 out of 4 subjects
+                Student Course Menu (c/e/r/s/x): s
+                Showing 2 subjects
+                [ Subject::541 -- mark = 55 -- grade =   P ]
+                [ Subject::455 -- mark = 57 -- grade =   P ]
+                Student Course Menu (c/e/r/s/x): e
+                Enrolling in Subject-742
+                You are now enrolled in 3 out of 4 subjects
+                Student Course Menu (c/e/r/s/x): s
+                Showing 3 subjects
+                [ Subject::541 -- mark = 55 -- grade =   P ]
+                [ Subject::455 -- mark = 57 -- grade =   P ]
+                [ Subject::742 -- mark = 55 -- grade =   P ]
+                Student Course Menu (c/e/r/s/x): e
+                Enrolling in Subject-97
+                You are now enrolled in 4 out of 4 subjects
+                Student Course Menu (c/e/r/s/x): s
+                Showing 4 subjects
+                [ Subject::541 -- mark = 55 -- grade =   P ]
+                [ Subject::455 -- mark = 57 -- grade =   P ]
+                [ Subject::742 -- mark = 55 -- grade =   P ]
+                [ Subject::097 -- mark = 85 -- grade =  HD ]
+                Student Course Menu (c/e/r/s/x): e
+                Students are allowed to enrol in 4 subjects only

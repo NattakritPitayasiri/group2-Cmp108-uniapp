@@ -1,0 +1,47 @@
+        Admin System (c/g/p/r/s/x): r
+        Remove by ID: 762740
+        Removing Student 762740 Account
+        Admin System (c/g/p/r/s/x): r
+        Remove by ID: 777888
+        Student 777888 does not exist
+        Admin System (c/g/p/r/s/x): x
+University System: (A)dmin, (S)tudent, or X : S
+        Student System (l/r/x): l
+        Student Sign In
+        Email: alen.jones@university.com
+        Password: Newworld123
+        email and password formats acceptable
+        Student does not exist
+        Student System (l/r/x): x
+University System: (A)dmin, (S)tudent, or X : A
+        Admin System (c/g/p/r/s/x): c
+        Clearing students database
+        Are you sure you want to clear the database (Y)ES/(N)O: N
+        Admin System (c/g/p/r/s/x): s
+        Student List
+        John Smith :: 673358 --> Email: john.smith@university.com
+        Admin System (c/g/p/r/s/x): c
+        Clearing students database
+        Are you sure you want to clear the database (Y)ES/(N)O: Y
+        Students data cleared
+        Admin System (c/g/p/r/s/x): s
+        Student List
+                < Nothing to Display >
+        Admin System (c/g/p/r/s/x): g
+        Grade Grouping
+                < Nothing to Display >
+        Admin System (c/g/p/r/s/x): p
+        PASS/FAIL Partition
+        FAIL --> []
+        PASS --> []
+        Admin System (c/g/p/r/s/x):
+University System: (A)dmin, (S)tudent, or X : S
+        Student System (l/r/x): l
+        Student Sign In
+        Email: john.smith@university.com
+        Password: Helloworld123
+        email and password formats acceptable
+        Student does not exist
+        Student System (l/r/x): x
+University System: (A)dmin, (S)tudent, or X : X
+Thank You

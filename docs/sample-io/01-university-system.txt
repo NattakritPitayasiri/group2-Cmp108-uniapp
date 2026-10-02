@@ -1,0 +1,6 @@
+University System: (A)dmin, (S)tudent, or X : A
+        Admin System (c/g/p/r/s/x): x
+University System: (A)dmin, (S)tudent, or X : S
+        Student System (l/r/x): x
+University System: (A)dmin, (S)tudent, or X : X
+Thank You

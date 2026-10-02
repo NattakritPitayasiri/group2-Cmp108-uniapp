@@ -1,0 +1,21 @@
+University System: (A)dmin, (S)tudent, or X : S
+        Student System (l/r/x): r
+        Student Sign Up
+        Email: johnsmith@university.com
+        Password: helloworld123
+        Incorrect email or password format
+        Email: john.smith@university.com
+        Password: Hello123
+        Incorrect email or password format
+        Email: john.smith@university.com
+        Password: Helloworld123
+        email and password formats acceptable
+        Student John Smith already exists
+        Student System (l/r/x): r
+        Student Sign Up
+        Email: alen.jones@university.com
+        Password: Helloworld123
+        email and password formats acceptable
+        Name: Alen Jones
+        Enrolling Student Alen Jones
+        Student System (l/r/x):

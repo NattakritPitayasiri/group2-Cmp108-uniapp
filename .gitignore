@@ -1,0 +1,13 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Runtime data file, each person creates their own when running the app
+students.data
+
+# OS / editor
+.DS_Store
+.vscode/
+.idea/
