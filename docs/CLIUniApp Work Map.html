@@ -1,0 +1,343 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>CLIUniApp Work Map</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+/* Layout: one reading column, three figures and a table, each making one claim (how the app connects, what blocks what, how code gets in, who waits on whom). */
+:root {
+  --bg: #f4f6f9;
+  --surface: #ffffff;
+  --fg: #19212e;
+  --muted: #566176;
+  --line: #c5ccd8;
+  --neo: #0f766e;     --neo-bg: #d5efeb;
+  --yinuo: #a85a07;   --yinuo-bg: #fbe8c4;
+  --jeongin: #1d4ed8; --jeongin-bg: #dbe5fc;
+  --royce: #be123c;   --royce-bg: #fddde5;
+  --font-body: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #11151c; --surface: #181e28; --fg: #e6eaf1; --muted: #9ba6b9; --line: #38425a;
+    --neo: #5eead4;     --neo-bg: #12403c;
+    --yinuo: #fbbf24;   --yinuo-bg: #46320e;
+    --jeongin: #93b4ff; --jeongin-bg: #1b2c55;
+    --royce: #fda4b8;   --royce-bg: #4d1b2a;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #11151c; --surface: #181e28; --fg: #e6eaf1; --muted: #9ba6b9; --line: #38425a;
+  --neo: #5eead4;     --neo-bg: #12403c;
+  --yinuo: #fbbf24;   --yinuo-bg: #46320e;
+  --jeongin: #93b4ff; --jeongin-bg: #1b2c55;
+  --royce: #fda4b8;   --royce-bg: #4d1b2a;
+  color-scheme: dark;
+}
+body { background: var(--bg); color: var(--fg); font-family: var(--font-body); font-size: 15px; line-height: 1.6; }
+.wrap { max-width: 980px; margin-inline: auto; padding-inline: 16px; padding-block: 28px 56px; }
+header { margin-block-end: 8px; }
+h1 { font-size: 1.9rem; line-height: 1.2; margin: 0 0 6px; font-weight: 600; text-wrap: balance; }
+.sub { color: var(--muted); margin: 0; max-width: 62ch; }
+h2 { font-size: 1.2rem; font-weight: 600; margin: 44px 0 4px; text-wrap: balance; }
+.lead { color: var(--muted); margin: 0 0 14px; max-width: 66ch; }
+figure { margin: 0; }
+.scroll { overflow-x: auto; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 8px; }
+.scroll svg { display: block; width: 100%; min-width: 780px; height: auto; }
+figcaption { color: var(--muted); font-size: 0.86rem; margin-top: 8px; max-width: 78ch; }
+code, .mono { font-family: var(--font-mono); font-size: 0.9em; }
+ul.plain { margin: 8px 0 0; padding-left: 1.2em; max-width: 70ch; }
+ul.plain li { margin-block: 6px; }
+table.deps { width: 100%; min-width: 640px; border-collapse: collapse; font-size: 0.9rem; }
+table.deps th { text-align: left; font-weight: 600; color: var(--muted); font-size: 0.78rem; letter-spacing: 0.04em; text-transform: uppercase; padding: 8px 10px; border-bottom: 1px solid var(--line); }
+table.deps td { padding: 8px 10px; border-bottom: 1px solid var(--line); vertical-align: top; }
+table.deps tr:last-child td { border-bottom: 0; }
+.dot { display: inline-block; width: 9px; height: 9px; border-radius: 50%; margin-right: 6px; }
+.dot.neo { background: var(--neo); } .dot.yinuo { background: var(--yinuo); } .dot.jeongin { background: var(--jeongin); } .dot.royce { background: var(--royce); }
+.status { display: grid; gap: 8px; margin-top: 10px; max-width: 70ch; }
+.status div { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 8px 12px; }
+.status b { font-weight: 600; }
+footer { margin-top: 40px; color: var(--muted); font-size: 0.82rem; max-width: 70ch; }
+
+/* SVG parts */
+.box { stroke-width: 1.6; }
+.neo { fill: var(--neo-bg); stroke: var(--neo); }
+.yinuo { fill: var(--yinuo-bg); stroke: var(--yinuo); }
+.jeongin { fill: var(--jeongin-bg); stroke: var(--jeongin); }
+.royce { fill: var(--royce-bg); stroke: var(--royce); }
+.plainbox { fill: var(--surface); stroke: var(--line); stroke-width: 1.6; }
+.dashed { stroke-dasharray: 6 4; }
+.region { fill: none; stroke: var(--line); stroke-width: 1.4; stroke-dasharray: 6 4; }
+.nm { font-family: var(--font-mono); font-size: 13px; font-weight: 600; fill: var(--fg); }
+.sb { font-family: var(--font-body); font-size: 11px; fill: var(--muted); }
+.lb { font-family: var(--font-body); font-size: 11px; fill: var(--muted); }
+.hd { font-family: var(--font-body); font-size: 13px; font-weight: 600; fill: var(--fg); }
+.dt { font-family: var(--font-body); font-size: 11px; fill: var(--muted); }
+.flow { stroke: var(--muted); stroke-width: 1.6; fill: none; }
+.flow.thick { stroke: var(--fg); stroke-width: 2.6; }
+.ah { fill: var(--muted); }
+.ahk { fill: var(--fg); }
+.crit { fill: none; stroke: var(--fg); stroke-width: 2.4; }
+.tag { fill: var(--fg); }
+.tagt { font-family: var(--font-body); font-size: 11px; font-weight: 600; fill: var(--bg); }
+.human { fill: var(--surface); stroke: var(--fg); stroke-width: 2.4; }
+</style>
+
+<div class="wrap">
+  <header>
+    <h1>CLIUniApp Work Map</h1>
+    <p class="sub">Group 2, Cmp1-08 · Assessment 1 Part 2. How the program fits together, who has to finish before whom, and how code gets into the repo.</p>
+  </header>
+
+  <h2>1. What the program is made of, and who owns what</h2>
+  <p class="lead">This follows the Part 1 class diagram we submitted. Each box is one class, the colour shows who writes it, and each arrow shows who calls whom.</p>
+  <figure>
+    <div class="scroll">
+      <svg viewBox="0 0 940 660" role="img" aria-label="CLIUniApp calls StudentSystem or AdminSystem. Both read and write through Database into the file students.data. StudentSystem passes the logged-in Student to the Course menu, which uses Student and Subject. The GUI reuses StudentSystem's login.">
+        <defs>
+          <marker id="a1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path class="ah" d="M0,0 L10,5 L0,10 z"/></marker>
+        </defs>
+
+        <!-- GUI region -->
+        <rect class="region" x="10" y="112" width="190" height="516" rx="10"/>
+        <text class="hd" x="20" y="132">GUIUniApp · Royce</text>
+
+        <!-- boxes -->
+        <rect class="box neo" x="400" y="20" width="200" height="56" rx="8"/>
+        <text class="nm" x="414" y="45">CLIUniApp</text><text class="sb" x="414" y="63">University menu: A / S / X</text>
+
+        <rect class="box neo" x="270" y="150" width="200" height="64" rx="8"/>
+        <text class="nm" x="284" y="175">StudentSystem</text><text class="sb" x="284" y="193">register + login (regex)</text>
+
+        <rect class="box jeongin" x="700" y="150" width="200" height="64" rx="8"/>
+        <text class="nm" x="714" y="175">AdminSystem</text><text class="sb" x="714" y="193">c / g / p / r / s / x</text>
+
+        <rect class="box royce" x="20" y="150" width="170" height="64" rx="8"/>
+        <text class="nm" x="34" y="175">LoginWindow</text><text class="sb" x="34" y="193">login screen</text>
+
+        <rect class="box yinuo dashed" x="270" y="290" width="200" height="64" rx="8"/>
+        <text class="nm" x="284" y="315">Course menu</text><text class="sb" x="284" y="333">c/e/r/s/x · not in Part 1</text>
+
+        <rect class="box jeongin" x="270" y="430" width="200" height="64" rx="8"/>
+        <text class="nm" x="284" y="455">Student</text><text class="sb" x="284" y="473">data + 4-subject limit</text>
+
+        <rect class="box jeongin" x="270" y="560" width="200" height="56" rx="8"/>
+        <text class="nm" x="284" y="585">Subject</text><text class="sb" x="284" y="603">id, mark, grade</text>
+
+        <rect class="box royce" x="20" y="560" width="170" height="56" rx="8"/>
+        <text class="nm" x="34" y="585">EnrolmentWindow</text><text class="sb" x="34" y="603">enrol screen</text>
+
+        <rect class="box royce" x="520" y="290" width="200" height="64" rx="8"/>
+        <text class="nm" x="534" y="315">Database</text><text class="sb" x="534" y="333">read / write / delete data</text>
+
+        <rect class="box royce" x="520" y="430" width="200" height="56" rx="8"/>
+        <text class="nm" x="534" y="455">students.data</text><text class="sb" x="534" y="473">file on disk</text>
+
+        <!-- GUI leftovers -->
+        <text class="sb" x="105" y="382" text-anchor="middle">2 windows still missing:</text>
+        <text class="sb" x="105" y="398" text-anchor="middle">Subject window</text>
+        <text class="sb" x="105" y="414" text-anchor="middle">Exception window</text>
+        <text class="sb" x="105" y="430" text-anchor="middle">(brief needs at least 4)</text>
+
+        <!-- arrows -->
+        <polyline class="flow" points="450,76 450,113 370,113 370,148" marker-end="url(#a1)"/>
+        <text class="lb" x="410" y="107" text-anchor="middle">choose S</text>
+        <polyline class="flow" points="550,76 550,113 800,113 800,148" marker-end="url(#a1)"/>
+        <text class="lb" x="675" y="107" text-anchor="middle">choose A</text>
+
+        <line class="flow" x1="190" y1="182" x2="268" y2="182" marker-end="url(#a1)"/>
+        <text class="lb" x="229" y="174" text-anchor="middle">same login</text>
+        <text class="lb" x="229" y="198" text-anchor="middle">as the CLI</text>
+
+        <line class="flow" x1="370" y1="214" x2="370" y2="288" marker-end="url(#a1)"/>
+        <text class="lb" x="362" y="250" text-anchor="end">login succeeds,</text>
+        <text class="lb" x="362" y="264" text-anchor="end">passes Student on</text>
+
+        <line class="flow" x1="370" y1="354" x2="370" y2="428" marker-end="url(#a1)"/>
+        <text class="lb" x="362" y="390" text-anchor="end">enrol / remove</text>
+        <text class="lb" x="362" y="404" text-anchor="end">show / change pw</text>
+
+        <line class="flow" x1="370" y1="494" x2="370" y2="558" marker-end="url(#a1)"/>
+        <text class="lb" x="362" y="530" text-anchor="end">creates 0..4 subjects</text>
+
+        <line class="flow" x1="190" y1="588" x2="268" y2="588" marker-end="url(#a1)"/>
+        <text class="lb" x="229" y="580" text-anchor="middle">shows</text>
+
+        <polyline class="flow" points="440,214 440,250 620,250 620,288" marker-end="url(#a1)"/>
+        <polyline class="flow" points="800,214 800,250 620,250"/>
+        <text class="lb" x="530" y="243" text-anchor="middle">read / write</text>
+
+        <line class="flow" x1="620" y1="354" x2="620" y2="428" marker-end="url(#a1)"/>
+        <text class="lb" x="630" y="396">read / write file</text>
+
+        <!-- legend -->
+        <rect class="box neo" x="560" y="522" width="14" height="14" rx="3"/>
+        <text class="sb" x="584" y="534">Neo: CLIUniApp, StudentSystem</text>
+        <rect class="box yinuo" x="560" y="548" width="14" height="14" rx="3"/>
+        <text class="sb" x="584" y="560">Yinuo: Course menu</text>
+        <rect class="box jeongin" x="560" y="574" width="14" height="14" rx="3"/>
+        <text class="sb" x="584" y="586">Jeongin: Student, Subject, AdminSystem</text>
+        <rect class="box royce" x="560" y="600" width="14" height="14" rx="3"/>
+        <text class="sb" x="584" y="612">Royce: Database, GUIUniApp</text>
+        <rect class="box plainbox dashed" x="560" y="626" width="14" height="14" rx="3"/>
+        <text class="sb" x="584" y="638">Dashed: not in Part 1, to be decided</text>
+      </svg>
+    </div>
+    <figcaption>Database stores each Student as a whole, with its Subjects inside, so there is no arrow from Database to Subject. Yinuo's Course menu has no class of its own in Part 1, because enrol, remove and show live on Student. The team has to choose between a new class and keeping them on Student.</figcaption>
+  </figure>
+
+  <h2>2. Who has to finish before whom</h2>
+  <p class="lead">Stage 2 comes first because every menu calls Student, Subject and Database. Inside that stage, Database cannot be finished until Student exists, so Jeongin's Student class is the root of the whole plan.</p>
+  <figure>
+    <div class="scroll">
+      <svg viewBox="0 0 940 330" role="img" aria-label="Four stages. Stage 1: agree the shared contract. Stage 2, the critical path: Student and Subject, then Database which needs Student, plus the University menu. Stage 3: each person builds their own menu in parallel. Stage 4: merge, cross-test, README, submit, showcase.">
+        <defs>
+          <marker id="a2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path class="ah" d="M0,0 L10,5 L0,10 z"/></marker>
+          <marker id="a3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="ahk" d="M0,0 L10,5 L0,10 z"/></marker>
+        </defs>
+
+        <!-- headers -->
+        <text class="hd" x="20" y="22">1 Shared contract</text><text class="dt" x="20" y="38">meeting · was 4 Oct</text>
+        <text class="hd" x="250" y="22">2 Foundation</text><text class="dt" x="250" y="38">target was Wed 7 Oct</text>
+        <text class="hd" x="520" y="22">3 Each person's menu</text><text class="dt" x="520" y="38">8 - 18 Oct, in parallel</text>
+        <text class="hd" x="770" y="22">4 Merge and submit</text><text class="dt" x="770" y="38">19 - 23 Oct</text>
+
+        <!-- stage 1 -->
+        <rect class="plainbox dashed" x="20" y="120" width="170" height="110" rx="8"/>
+        <text class="nm" x="34" y="148">decisions.md</text>
+        <text class="nm" x="34" y="168">interfaces.md</text>
+        <text class="sb" x="34" y="192">method names, arguments</text>
+        <text class="sb" x="34" y="206">and returns, agreed first</text>
+
+        <!-- stage 2 -->
+        <rect class="box jeongin" x="250" y="50" width="190" height="56" rx="8"/>
+        <text class="nm" x="264" y="75">Student + Subject</text><text class="sb" x="264" y="93">Jeongin · J.1 J.2 J.3</text>
+        <rect class="box royce" x="250" y="136" width="190" height="56" rx="8"/>
+        <text class="nm" x="264" y="161">Database</text><text class="sb" x="264" y="179">Royce · R.1 R.2 R.3</text>
+        <rect class="box neo" x="250" y="222" width="190" height="56" rx="8"/>
+        <text class="nm" x="264" y="247">University menu</text><text class="sb" x="264" y="265">Neo · N.3 first version done</text>
+        <line class="flow" x1="345" y1="106" x2="345" y2="134" marker-end="url(#a2)"/>
+        <text class="lb" x="353" y="125">R.2 needs J.1</text>
+        <rect class="crit" x="244" y="44" width="202" height="240" rx="10"/>
+        <rect class="tag" x="244" y="292" width="202" height="24" rx="6"/>
+        <text class="tagt" x="345" y="308" text-anchor="middle">Critical path: late = all late</text>
+
+        <!-- stage 3 -->
+        <rect class="box neo" x="520" y="50" width="190" height="52" rx="8"/>
+        <text class="nm" x="534" y="74">Student menu</text><text class="sb" x="534" y="92">register / login / regex</text>
+        <rect class="box yinuo" x="520" y="110" width="190" height="52" rx="8"/>
+        <text class="nm" x="534" y="134">Course menu</text><text class="sb" x="534" y="152">enrol / remove / show / pw</text>
+        <rect class="box jeongin" x="520" y="170" width="190" height="52" rx="8"/>
+        <text class="nm" x="534" y="194">Admin menu</text><text class="sb" x="534" y="212">group / partition / remove</text>
+        <rect class="box royce" x="520" y="230" width="190" height="52" rx="8"/>
+        <text class="nm" x="534" y="254">GUIUniApp</text><text class="sb" x="534" y="272">4 windows</text>
+
+        <!-- stage 4 -->
+        <rect class="plainbox" x="770" y="50" width="150" height="42" rx="8"/>
+        <text class="nm" x="784" y="67">19 Oct</text><text class="sb" x="784" y="84">merge all parts</text>
+        <rect class="plainbox" x="770" y="100" width="150" height="42" rx="8"/>
+        <text class="nm" x="784" y="117">20 Oct</text><text class="sb" x="784" y="134">cross-test</text>
+        <rect class="plainbox" x="770" y="150" width="150" height="42" rx="8"/>
+        <text class="nm" x="784" y="167">21 Oct</text><text class="sb" x="784" y="184">README</text>
+        <rect class="plainbox" x="770" y="200" width="150" height="42" rx="8"/>
+        <text class="nm" x="784" y="217">22 Oct</text><text class="sb" x="784" y="234">submit zip</text>
+        <rect class="human" x="770" y="250" width="150" height="42" rx="8"/>
+        <text class="nm" x="784" y="267">23 Oct</text><text class="sb" x="784" y="284">Showcase (everyone)</text>
+        <line class="flow" x1="845" y1="92" x2="845" y2="100"/>
+        <line class="flow" x1="845" y1="142" x2="845" y2="150"/>
+        <line class="flow" x1="845" y1="192" x2="845" y2="200"/>
+        <line class="flow" x1="845" y1="242" x2="845" y2="250"/>
+
+        <!-- stage arrows -->
+        <line class="flow" x1="190" y1="175" x2="248" y2="175" marker-end="url(#a2)"/>
+        <line class="flow thick" x1="446" y1="166" x2="518" y2="166" marker-end="url(#a3)"/>
+        <line class="flow" x1="710" y1="166" x2="768" y2="166" marker-end="url(#a2)"/>
+      </svg>
+    </div>
+    <figcaption>Dates come from the task board (showcase Fri 23 Oct, submit the day before). If any part cannot be merged into the program, the whole group loses 10%. Anyone who misses the showcase gets 0 for Part 2 and Part 3.</figcaption>
+  </figure>
+
+  <h2>3. Who waits on whom</h2>
+  <p class="lead">These are the dependencies written in the Notes column of the Notion board. The board has no dependency property, so nothing there can be filtered or drawn. This table is the same information in one place.</p>
+  <div class="scroll">
+    <table class="deps">
+      <thead><tr><th>Task</th><th>Owner</th><th>Needs first</th><th>Who waits if it is not done</th></tr></thead>
+      <tbody>
+        <tr><td><span class="mono">ALL.2</span> Agree method names</td><td>All</td><td><span class="mono">ALL.1</span></td><td>J.1, J.2, R.1, R.2, N.3</td></tr>
+        <tr><td><span class="mono">J.1</span> Student class</td><td><span class="dot jeongin"></span>Jeongin</td><td><span class="mono">ALL.2</span></td><td>R.2 (Royce), N.5 (Neo), Y.1 (Yinuo), J.4, R.5</td></tr>
+        <tr><td><span class="mono">J.2</span> Subject class</td><td><span class="dot jeongin"></span>Jeongin</td><td><span class="mono">ALL.2</span></td><td>Y.2 (Yinuo)</td></tr>
+        <tr><td><span class="mono">R.2</span> Database read / write</td><td><span class="dot royce"></span>Royce</td><td><span class="mono">J.1</span></td><td>N.5 and N.6 (Neo), Y.2 (Yinuo), J.5 (Jeongin), R.5</td></tr>
+        <tr><td><span class="mono">N.3</span> Skeleton + University menu</td><td><span class="dot neo"></span>Neo</td><td><span class="mono">ALL.1, ALL.2</span></td><td>Everyone plugging a menu in</td></tr>
+        <tr><td><span class="mono">N.5</span> Register</td><td><span class="dot neo"></span>Neo</td><td><span class="mono">J.1, R.2</span></td><td>Nobody directly</td></tr>
+        <tr><td><span class="mono">N.6</span> Login</td><td><span class="dot neo"></span>Neo</td><td><span class="mono">R.2</span></td><td>Y.9 (Yinuo)</td></tr>
+        <tr><td><span class="mono">Y.1</span> Course menu shell</td><td><span class="dot yinuo"></span>Yinuo</td><td><span class="mono">J.1</span> (a hand-made Student is enough)</td><td>Nobody directly</td></tr>
+        <tr><td><span class="mono">Y.2</span> Enrol</td><td><span class="dot yinuo"></span>Yinuo</td><td><span class="mono">J.2, R.2</span></td><td>Nobody directly</td></tr>
+        <tr><td><span class="mono">Y.9</span> Connect to login</td><td><span class="dot yinuo"></span>Yinuo</td><td><span class="mono">N.6</span></td><td>N.9</td></tr>
+        <tr><td><span class="mono">N.9</span> Merge all parts</td><td><span class="dot neo"></span>Neo</td><td><span class="mono">Y.8, J.11, R.8</span></td><td>ALL.3 (cross-test)</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="lead" style="margin-top:8px">Not blocked by anyone: N.4 (regex), R.4 (GUI sketch), and Y.1 if Yinuo builds a fake Student first.</p>
+
+  <h2>4. How code gets into the repo</h2>
+  <p class="lead">Everyone follows the same loop for every task. Each person's commit history is the evidence of what they wrote.</p>
+  <figure>
+    <div class="scroll">
+      <svg viewBox="0 0 940 200" role="img" aria-label="Git loop: pull main, create a branch, write code yourself, commit and push, open a pull request, merge into main, then pull again for the next task.">
+        <defs>
+          <marker id="a4" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path class="ah" d="M0,0 L10,5 L0,10 z"/></marker>
+        </defs>
+
+        <rect class="plainbox" x="20" y="40" width="130" height="76" rx="8"/>
+        <text class="nm" x="34" y="66">git pull</text><text class="sb" x="34" y="86">get latest main</text>
+        <rect class="plainbox" x="170" y="40" width="130" height="76" rx="8"/>
+        <text class="nm" x="184" y="66">branch</text><text class="sb" x="184" y="86">name/task</text>
+        <rect class="human" x="320" y="40" width="130" height="76" rx="8"/>
+        <text class="nm" x="334" y="66">write code</text><text class="sb" x="334" y="86">match sample I/O</text>
+        <rect class="plainbox" x="470" y="40" width="130" height="76" rx="8"/>
+        <text class="nm" x="484" y="66">commit + push</text><text class="sb" x="484" y="86">up to GitHub</text>
+        <rect class="plainbox" x="620" y="40" width="130" height="76" rx="8"/>
+        <text class="nm" x="634" y="66">Pull Request</text><text class="sb" x="634" y="86">teammate reviews</text>
+        <rect class="plainbox" x="770" y="40" width="130" height="76" rx="8"/>
+        <text class="nm" x="784" y="66">merge</text><text class="sb" x="784" y="86">into main</text>
+
+        <line class="flow" x1="150" y1="78" x2="168" y2="78" marker-end="url(#a4)"/>
+        <line class="flow" x1="300" y1="78" x2="318" y2="78" marker-end="url(#a4)"/>
+        <line class="flow" x1="450" y1="78" x2="468" y2="78" marker-end="url(#a4)"/>
+        <line class="flow" x1="600" y1="78" x2="618" y2="78" marker-end="url(#a4)"/>
+        <line class="flow" x1="750" y1="78" x2="768" y2="78" marker-end="url(#a4)"/>
+
+        <polyline class="flow" points="835,116 835,160 85,160 85,118" marker-end="url(#a4)"/>
+        <text class="lb" x="460" y="153" text-anchor="middle">next task: pull again, every time</text>
+
+        <text class="hd" x="385" y="28" text-anchor="middle">No AI-written code at this step</text>
+      </svg>
+    </div>
+    <figcaption>Nobody commits straight to main. The "write code" step has a heavy outline because the brief bans AI-generated code (it can be marked 0), and at the showcase everyone has to explain their own code live. AI can explain and review, not write.</figcaption>
+  </figure>
+
+  <h2>5. To decide before writing code</h2>
+  <ul class="plain">
+    <li><b>Method names, arguments and returns</b> for Student, Subject, Database, StudentSystem and AdminSystem. The submitted Part 1 diagram already has all of them, so use it as the first draft and record the result in <code>docs/interfaces.md</code>.</li>
+    <li><b>Submitted or corrected Part 1 design.</b> The board asks us to decide whether the code follows the submitted diagram or the corrected one (Add-a-subject as an include, Database to Student as a dependency).</li>
+    <li><b>Yinuo's Course menu</b> as a new class, or as methods on Student.</li>
+    <li><b>File format and Python version.</b> Pickle or not, and one Python version for everyone.</li>
+  </ul>
+  <p class="lead" style="margin-top:12px">Settled already: subject IDs are unique across the whole system. The board notes that the tutor confirmed this in Part 1, and always shows three digits (097, not 97).</p>
+
+  <h2>Status on 8 Oct 2026</h2>
+  <div class="status">
+    <div><b>Task board:</b> every row still says To Do, including ones that are done (N.1, N.2, N.3 first version). It cannot show real progress yet.</div>
+    <div><b>Code in the repo:</b> only Neo's University menu, on branch <code>neo/university-menu</code>, not merged into main.</div>
+    <div><b>Teammates in the repo:</b> one collaborator has joined, one invitation is pending, and one person is not in the list yet.</div>
+    <div><b>Decision files:</b> decisions.md on main is still empty, and the interfaces.md draft is not committed.</div>
+  </div>
+
+  <footer>
+    Sources: the submitted Part 1 report (.docx, class diagram in section 3), the Notion task board (FSD Part 2), the task plan in Neo's notes, and the group's GitHub repo on 8 Oct. Statuses on the board may be out of date.
+  </footer>
+</div>
+
+</body></html>
