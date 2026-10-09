@@ -1,11 +1,27 @@
+def admin_menu():
+    while True:
+        admin_action = input("  Admin System (c/g/p/r/s/x):").lower()
+        if admin_action == "x":
+            break
+        else:
+            print("TBC") ##TBC team
+
+def student_menu():
+    while True:
+        student_action = input("  Student System (l/r/x):").lower()
+        if student_action == "x":
+            break
+        else:
+            print("TBC") ##TBC team
+        
+
 def main():
     while True:
         choice = input("University System: (A)dmin, (S)tudent, or X : ").upper()
-
         if choice == "A":
-            selected = input("  Admin System (c/g/p/r/s/x):")
+            admin_menu()
         elif choice == "S":
-            selected = input("  Student System (l/r/x):")
+            student_menu()
         elif choice == "X":
             print("Thank You")
             break
@@ -16,4 +32,3 @@ def main():
 if __name__ == "__main__":
     main()
 
-    
