@@ -4,7 +4,7 @@ def admin_menu():
         if admin_action == "x":
             break
         else:
-            print("TBC") ##TBC team
+            print("TBC") ##TBC Yinou
 
 def student_menu():
     while True:
@@ -12,10 +12,10 @@ def student_menu():
         if student_action == "x":
             break
         else:
-            print("TBC") ##TBC team
+            print("TBC") ##TBC Jeongin
         
 
-def main():
+def main(): ## Neo Only
     while True:
         choice = input("University System: (A)dmin, (S)tudent, or X : ").upper()
         if choice == "A":
