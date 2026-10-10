@@ -14,8 +14,8 @@ def verify_patterns(email, password):
 
 def email_login():
     while True:
-        email = input("Email: ")
-        password = input("Password: ")
+        email = input("Email: ").strip()
+        password = input("Password: ").strip()
         if verify_patterns(email, password):
             print("email and password formats acceptable")
             return email, password
@@ -26,4 +26,4 @@ def register():
     email, password = email_login()
 
 def login():
-    email, password= email_login()
+    email, password = email_login()
