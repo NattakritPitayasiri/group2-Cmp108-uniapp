@@ -1,18 +1,26 @@
+import student_system
+
 def admin_menu():
     while True:
         admin_action = input("  Admin System (c/g/p/r/s/x):").lower()
         if admin_action == "x":
             break
         else:
-            print("TBC") ##TBC Yinou
+            print("Please select Admin Action again") ##TBC Jeongin
 
 def student_menu():
     while True:
         student_action = input("  Student System (l/r/x):").lower()
         if student_action == "x":
             break
+        elif student_action == "r":
+            print("Student Sign Up")
+            student_system.register()
+        elif student_action == "l":
+            print("Student Sign In")
+            student_system.login()
         else:
-            print("TBC") ##TBC Jeongin
+            print("TBC") ##TBC Yinou
         
 
 def main(): ## Neo Only
