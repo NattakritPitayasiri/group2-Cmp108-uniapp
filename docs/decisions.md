@@ -21,7 +21,7 @@ Everyone runs `python3 --version` and reports here. pickle files can break betwe
 - Jeongin:
 - Royce:3.14.7
 
-**Decided:**
+**Decided:** Pickle
 
 ### 2. How students.data is stored
 The brief says "read and write objects", which points to `pickle`.
