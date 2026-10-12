@@ -19,7 +19,7 @@ Everyone runs `python3 --version` and reports here. pickle files can break betwe
 - Neo: 3.14.7
 - Yinuo:
 - Jeongin:
-- Royce:
+- Royce:3.14.7
 
 **Decided:**
 
