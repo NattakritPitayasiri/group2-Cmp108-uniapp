@@ -45,6 +45,9 @@ class Student:
         return total / self.count_subjects()
 
     def calculate_overall_grade(self):
+        if self.count_subjects() == 0:
+            return None
+        
         average = self.calculate_average_mark()
         if average >= 85:
             return "HD"
@@ -58,6 +61,9 @@ class Student:
             return "Z"
 
     def calculate_pass_fail(self):
+        if self.count_subjects() == 0:
+            return None
+        
         average = self.calculate_average_mark()
         if average >= 50:
             return "PASS"
@@ -71,6 +77,7 @@ class Student:
 if __name__ == "__main__":
 
     student1 = Student("002340", "John Smith", "john.smith@university.com", "Helloworld123")
+    student2 = Student("673358", "Grace Choi", "grace.choi@university.com", "Goodmorning123")
 
     for i in range(5):
         subject = Subject()
@@ -94,5 +101,9 @@ if __name__ == "__main__":
     print("Pass/Fail: ", student1.calculate_pass_fail())
 
     print(student1)
+    print(student2)
+    print(student2.calculate_average_mark())
+    print(student2.calculate_overall_grade())
+    print(student2.calculate_pass_fail())
 
    
