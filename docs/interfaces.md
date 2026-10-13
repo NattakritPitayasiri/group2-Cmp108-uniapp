@@ -31,8 +31,8 @@ Max 4 subjects. Pass if the average mark is 50 or more.
 | `view_enrolment_list` | | | |
 | `change_password` | | | |
 | `calculate_average_mark` | | | |
-| `calculate_overall_grade` | None | String: HD, D, C, P, or Z | AdminSystem.group_by_grade |
-| `calculate_pass_fail` | None | String: PASS or FAIL | AdminSystem.categorise_pass_fail |
+| `calculate_overall_grade` | None | String: HD, D, C, P, or Z; None if no subjects | AdminSystem.group_by_grade |
+| `calculate_pass_fail` | None | String: PASS or FAIL; None if no subjects | AdminSystem.categorise_pass_fail |
 
 `enrol_subject()` and `remove_subject()` return True on success and False on failure. Feedback messages are handled by the calling menu or GUI.
 
