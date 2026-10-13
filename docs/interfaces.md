@@ -49,10 +49,10 @@ Brief: check `students.data` exists and create it if not; read and write objects
 
 | Method | Arguments | Returns | Used by |
 |---|---|---|---|
-| `save_to_file` | | | |
-| `read_from_file` | | | |
-| `update_file` | | | |
-| `delete_from_file` | | | |
+| `save_to_file` | | | |Save the student list to student data
+| `read_from_file` | | | | Read and return the student list
+| `update_file` | | | |update student list
+| `delete_from_file` | | | | delete all student records by empty list
 
 ## StudentSystem (owner: Neo)
 
