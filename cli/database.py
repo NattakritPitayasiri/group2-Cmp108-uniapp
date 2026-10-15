@@ -2,7 +2,7 @@ import pickle
 from pathlib import Path
 class Database:
     def __init__(self):
-         self.file_path = Path ("students.data")
+         self.file_path = Path(__file__).resolve().parent / "students.data"
 
          if not self.file_path.exists():
                            self.file_path.touch()
