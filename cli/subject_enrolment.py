@@ -1,2 +1,2 @@
-def enrolment():
-    
+def course_menu(student):
+    pass
