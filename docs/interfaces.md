@@ -77,6 +77,7 @@ Student menu: register and login.
 
 | Method | Arguments | Returns | Used by |
 |---|---|---|---|
+| `__init__` | `database`: Database object | `None` | University menu |
 | `admin_subsystem` | | | |
 | `view_all_students` | | | |
 | `group_by_grade` | | | |

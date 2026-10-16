@@ -1,6 +1,6 @@
 class AdminSystem:
-    def __init__(self, students):
-        self.students = students
+    def __init__(self, database):
+        self.database = database
 
     def admin_subsystem(self):
         while True:
@@ -31,29 +31,36 @@ class AdminSystem:
                 print("Invalid choice. Please try again.")    
 
     def view_all_students(self):
+        students = self.database.read_from_file()
+
         print("\tStudent List")
 
-        if len(self.students) == 0:
+        if len(students) == 0:
             print("\t\t< Nothing to Display >")
         else:
-            for student in self.students:
+            for student in students:
                 print(f"\t{student}")
 
     def remove_student(self, student_id):
-        for student in self.students:
+        students = self.database.read_from_file()
+
+        for student in students:
             if student.student_id == student_id:
-                self.students.remove(student)
+                students.remove(student)
+                self.database.save_to_file(students)
                 return True
         return False
 
     def clear_all_students(self):
-        self.students.clear()
+        self.database.delete_from_file()
 
     def categorise_pass_fail(self):
+        students = self.database.read_from_file()
+
         pass_details = []
         fail_details = []
 
-        for student in self.students:
+        for student in students:
             grade = student.calculate_overall_grade()
 
             if grade is None:
@@ -72,13 +79,15 @@ class AdminSystem:
         print(f"\tPASS --> [{', '.join(pass_details)}]")
 
     def group_by_grade(self):
+        students = self.database.read_from_file()
+
         hd_students = []
         d_students = []
         c_students = []    
         p_students = []
         z_students = []
 
-        for student in self.students:
+        for student in students:
             grade = student.calculate_overall_grade()
 
             if grade is None:
@@ -115,17 +124,8 @@ class AdminSystem:
 
 
 if __name__ == "__main__":
-    from student import Student
-    from subject import Subject
+    from database import Database
 
-    student1 = Student("673358", "John Smith", "john.smith@university.com", "Helloworld123")
-    student2 = Student("762740", "Alen Jones", "alen.jones@university.com", "Goodmorning123")
-
-    subject1 = Subject()
-    student1.enrol_subject(subject1)
-
-    subject2 = Subject()
-    student2.enrol_subject(subject2)
-    
-    admin = AdminSystem([student1, student2])
+    database = Database()
+    admin = AdminSystem(database)
     admin.admin_subsystem()
