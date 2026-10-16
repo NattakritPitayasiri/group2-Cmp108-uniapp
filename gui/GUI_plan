@@ -1,0 +1,43 @@
+Framework: Python Tkinter
+
+1.Login Window
+Components:
+ Email input field
+ Password input field
+ Login button
+Function:
+Display->Login Window
+StudentSystem-Verify->student credenyials
+Login->open->Enrolment Window
+
+2. Enrolment Window
+Components
+ Enroll subjects list
+ Subject (0-4)
+ Enrol Subject button
+ View Subject button
+Function
+ Display->student's enrolled subjects
+ Enrolment successful->Automatically generate a subject
+ Update-> Enrolment list
+ Prevent-> subjects>4
+
+3.Subject Window
+ Compents
+  Subject ID
+  Mark
+  Grade
+  Back button
+Function
+ Display-> selected subject's details
+ Return-> Enrolment Window
+*Additional GUI feature
+
+4.Exception Window
+ Compents
+  Error meaase
+  OK button
+Function
+ Login field-empty->Display->Error
+ Subject>4->Display->Error
+
