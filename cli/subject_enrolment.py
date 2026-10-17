@@ -26,6 +26,14 @@ def enrol_in_subject(student):
     else:
         print("\t\tStudents are allowed to enrol in 4 subjects only")
 
+def remove_enrolled_subject(student):
+    subject_id = input("\t\tRemove Subject by ID: ").strip()
+    if student.remove_subject(subject_id):
+        print(f"\t\tDropping Subject-{subject_id}")
+        print(f"\t\tYou are now enrolled in "
+              f"{student.count_subjects()} out of 4 subjects")
+        save_student(student)
+
 def save_student(student):
     database = Database()
     students = database.read_from_file()
@@ -46,7 +54,7 @@ def course_menu(student):
         elif course_action == "e":
             enrol_in_subject(student)
         elif course_action == "r":
-            pass
+            remove_enrolled_subject(student)
         elif course_action == "s":
             pass
         elif course_action == "x":
