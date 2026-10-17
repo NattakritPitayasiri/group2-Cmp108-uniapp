@@ -20,7 +20,7 @@ def student_menu():
             print("Student Sign In")
             student_system.login()
         else:
-            print("TBC") ##TBC Yinou
+            print("Invalid choice. Please try again")
         
 
 def main(): ## Neo Only

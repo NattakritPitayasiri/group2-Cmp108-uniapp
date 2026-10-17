@@ -47,7 +47,12 @@ def register():
     student_id = generate_student_id()
     while is_id_taken(student_id, student_db): #check duplicated id
         student_id = generate_student_id()
-    name = input("Name: ").strip()
+
+    while True:
+        name = input("Name: ").strip()
+        if name:
+            break
+        print("Please fill your name")
     student = create_student(student_id, name, email, password)
     student_db.append(student)
     db.save_to_file(student_db)
