@@ -2,6 +2,7 @@ import re
 import random
 from student import Student
 from database import Database
+from subject_enrolment import course_menu
 
 EMAIL_PATTERN = r"[a-z0-9_]+(\.?[a-z0-9]+)?@university\.com"
 PASSWORD_PATTERN = r"[A-Z][a-zA-Z]{5,}\d{3,}"
@@ -55,6 +56,13 @@ def register():
 
 def login():
     email, password = email_login()
+    student_db = Database().read_from_file()#list of student in database
+    for s in student_db:
+        if s.email == email and s.password == password:
+            course_menu(s)
+            return
+    print("Student does not exist")
+
 
 def create_student(student_id, name, email, password):
     student = Student(student_id, name, email, password)
