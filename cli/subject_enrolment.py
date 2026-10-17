@@ -1,8 +1,23 @@
 from database import Database
 from subject import Subject
 
-def enrol_in_subject(student):
+def is_subject_id_taken(subject_id, students):
+    for saved_student in students:
+        for saved_subject in saved_student.view_enrolment_list():
+            if saved_subject.subject_id == subject_id:
+                return True
+    return False
+
+def create_unique_subject():
+    database = Database()
+    students = database.read_from_file()
     subject = Subject()
+    while is_subject_id_taken(subject.subject_id, students):
+        subject = Subject()
+    return subject
+
+def enrol_in_subject(student):
+    subject = create_unique_subject()
     if student.enrol_subject(subject):
         print(f"\t\tEnrolling in Subject-{subject.subject_id}")
         print(f"\t\tYou are now enrolled in "
