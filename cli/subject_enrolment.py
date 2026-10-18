@@ -34,6 +34,11 @@ def remove_enrolled_subject(student):
               f"{student.count_subjects()} out of 4 subjects")
         save_student(student)
 
+def show_enrolled_subjects(student):
+    print(f"\t\tShowing {student.count_subjects()} subjects")
+    for subject in student.view_enrolment_list():
+        print(f"\t\t{subject}")
+
 def save_student(student):
     database = Database()
     students = database.read_from_file()
@@ -56,6 +61,6 @@ def course_menu(student):
         elif course_action == "r":
             remove_enrolled_subject(student)
         elif course_action == "s":
-            pass
+            show_enrolled_subjects(student)
         elif course_action == "x":
             break
