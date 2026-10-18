@@ -28,11 +28,16 @@ def enrol_in_subject(student):
 
 def remove_enrolled_subject(student):
     subject_id = input("\t\tRemove Subject by ID: ").strip()
+    if not subject_id.isdigit() or len(subject_id) != 3:
+        print("\t\tSubject ID must be numeric")
+        return
     if student.remove_subject(subject_id):
         print(f"\t\tDropping Subject-{subject_id}")
         print(f"\t\tYou are now enrolled in "
               f"{student.count_subjects()} out of 4 subjects")
         save_student(student)
+    else:
+        print("\t\tSubject ID not found")
 
 def show_enrolled_subjects(student):
     print(f"\t\tShowing {student.count_subjects()} subjects")
@@ -75,3 +80,5 @@ def course_menu(student):
             show_enrolled_subjects(student)
         elif course_action == "x":
             break
+        else:
+            print("t\tInvalid option")
