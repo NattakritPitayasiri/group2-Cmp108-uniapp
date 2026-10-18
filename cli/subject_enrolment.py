@@ -39,6 +39,17 @@ def show_enrolled_subjects(student):
     for subject in student.view_enrolment_list():
         print(f"\t\t{subject}")
 
+def change_student_password(student):
+    print("\t\tUpdating Password")
+    new_password = input("\t\tNew Password: ").strip()
+    while True:
+        confirm_password = input("\t\tConfirm Password: ").strip()
+        if new_password == confirm_password:
+            student.change_password(new_password)
+            save_student(student)
+            return
+        print("\t\tPassword does not match - try again")
+
 def save_student(student):
     database = Database()
     students = database.read_from_file()
@@ -55,7 +66,7 @@ def course_menu(student):
             "\t\tStudent Course Menu (c/e/r/s/x): "
         ).strip().lower()
         if course_action == "c":
-            pass
+            change_student_password(student)
         elif course_action == "e":
             enrol_in_subject(student)
         elif course_action == "r":
