@@ -28,11 +28,32 @@ def enrol_in_subject(student):
 
 def remove_enrolled_subject(student):
     subject_id = input("\t\tRemove Subject by ID: ").strip()
+    if not subject_id.isdigit() or len(subject_id) != 3:
+        print("\t\tSubject ID must be numeric")
+        return
     if student.remove_subject(subject_id):
         print(f"\t\tDropping Subject-{subject_id}")
         print(f"\t\tYou are now enrolled in "
               f"{student.count_subjects()} out of 4 subjects")
         save_student(student)
+    else:
+        print("\t\tSubject ID not found")
+
+def show_enrolled_subjects(student):
+    print(f"\t\tShowing {student.count_subjects()} subjects")
+    for subject in student.view_enrolment_list():
+        print(f"\t\t{subject}")
+
+def change_student_password(student):
+    print("\t\tUpdating Password")
+    new_password = input("\t\tNew Password: ").strip()
+    while True:
+        confirm_password = input("\t\tConfirm Password: ").strip()
+        if new_password == confirm_password:
+            student.change_password(new_password)
+            save_student(student)
+            return
+        print("\t\tPassword does not match - try again")
 
 def save_student(student):
     database = Database()
@@ -50,12 +71,14 @@ def course_menu(student):
             "\t\tStudent Course Menu (c/e/r/s/x): "
         ).strip().lower()
         if course_action == "c":
-            pass
+            change_student_password(student)
         elif course_action == "e":
             enrol_in_subject(student)
         elif course_action == "r":
             remove_enrolled_subject(student)
         elif course_action == "s":
-            pass
+            show_enrolled_subjects(student)
         elif course_action == "x":
             break
+        else:
+            print("t\tInvalid option")
