@@ -29,7 +29,7 @@ def enrol_in_subject(student):
 def remove_enrolled_subject(student):
     subject_id = input("\t\tRemove Subject by ID: ").strip()
     if not subject_id.isdigit() or len(subject_id) != 3:
-        print("\t\tSubject ID must be numeric")
+        print("\t\tSubject ID must be a 3-digit number")
         return
     if student.remove_subject(subject_id):
         print(f"\t\tDropping Subject-{subject_id}")
@@ -81,4 +81,4 @@ def course_menu(student):
         elif course_action == "x":
             break
         else:
-            print("t\tInvalid option")
+            print("\t\tInvalid option")
