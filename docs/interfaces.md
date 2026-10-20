@@ -10,7 +10,9 @@ Optional: controller classes (`StudentController`, `SubjectController`, ...) tha
 
 | File | Contains | Owner |
 |---|---|---|
-| | | |
+| `cli/student.py` | Student class | Jeongin |
+| `cli/subject.py` | Subject class | Jeongin |
+| `cli/admin_system.py` | AdminSystem class | Jeongin |
 
 ## Proposed names from the Part 1 class diagram
 
@@ -25,13 +27,22 @@ Max 4 subjects. Pass if the average mark is 50 or more.
 
 | Method / field | Arguments | Returns | Used by |
 |---|---|---|---|
-| `enrol_subject` | | | |
-| `count_subjects` | | | |
-| `notify_limit` | | | |
-| `remove_subject` | | | |
-| `view_enrolment_list` | | | |
-| `change_password` | | | |
-| `calculate_average_mark` | | | |
+| `__init__` | `student_id`, `name`, `email`, `password` | `None` | Student registration |
+| `student_id` | — | String, e.g. `"000123"` | Student menu, AdminSystem, Database |
+| `name`, `email`, `password` | — | Strings | Student menu, AdminSystem, GUI |
+| `subjects` | — | List of Subject objects | Enrolment menu, AdminSystem, GUI |
+| `enrol_subject` | `subject`: Subject object | `True` if added; `False` if the four-subject limit is reached | Enrolment menu, GUI |
+| `add_subject` | `subject`: Subject object | `None` | Student.enrol_subject |
+| `count_subjects` | None | Integer | Student methods, enrolment menu |
+| `remove_subject` | `subject_id`: String | `True` if removed; `False` if not found | Enrolment menu, GUI |
+| `view_enrolment_list` | None | List of Subject objects | Enrolment menu, GUI |
+| `change_password` | `new_password`: String | `None` | Enrolment menu |
+| `calculate_average_mark` | None | Average mark; `0.0` if no subjects | Student grade methods, AdminSystem |
+| `calculate_overall_grade` | None | `"HD"`, `"D"`, `"C"`, `"P"`, or `"Z"`; `None` if no subjects | AdminSystem.group_by_grade, AdminSystem.categorise_pass_fail |
+| `calculate_pass_fail` | None | `"PASS"` or `"FAIL"`; `None` if no subjects | AdminSystem.categorise_pass_fail |
+| `__str__` | None | Student details as a string | AdminSystem.view_all_students |
+
+`enrol_subject()` and `remove_subject()` return True on success and False on failure. Feedback messages are handled by the calling menu or GUI.
 
 ## Subject (owner: Jeongin)
 
@@ -39,9 +50,17 @@ Brief: `id` is a unique random 3-digit number (001 to 999). `mark` is random, 25
 
 | Method / field | Arguments | Returns | Used by |
 |---|---|---|---|
-| `generate_subject_id` | | | |
-| `generate_mark` | | | |
-| `calculate_grade` | | | |
+| `__init__` | None | `None`; creates the subject ID, mark, and grade | Enrolment menu, GUI |
+| `subject_id` | — | Three-digit string, e.g. `"097"` | Student.remove_subject, enrolment menu, GUI |
+| `mark` | — | Integer from 25 to 100 | Subject.calculate_grade, Student.calculate_average_mark |
+| `grade` | — | `"HD"`, `"D"`, `"C"`, `"P"`, or `"Z"` | Subject output |
+| `generate_subject_id` | None | Random ID string from `"001"` to `"999"` | Subject.__init__ |
+| `generate_mark` | None | Random integer from 25 to 100 | Subject.__init__ |
+| `calculate_grade` | None | Grade string calculated from the mark | Subject.__init__ |
+| `__str__` | None | Subject details as a string | Enrolment menu, GUI |
+
+Subject generates a random ID but does not check for duplicates.
+The enrolment code must check that the ID is unique within the student's subject list before enrolling.
 
 ## Database (owner: Royce)
 
@@ -74,12 +93,13 @@ Student menu: register and login.
 
 | Method | Arguments | Returns | Used by |
 |---|---|---|---|
-| `admin_subsystem` | | | |
-| `view_all_students` | | | |
-| `group_by_grade` | | | |
-| `categorise_pass_fail` | | | |
-| `remove_student` | | | |
-| `clear_all_students` | | | |
+| `__init__` | `database`: Database object | `None` | University menu |
+| `admin_subsystem` | None | `None`; returns when x is selected | University menu |
+| `view_all_students` | None | `None`; prints the student list | Admin menu |
+| `group_by_grade` | None | `None`; prints students grouped by overall grade | Admin menu |
+| `categorise_pass_fail` | None | `None`; prints FAIL and PASS groups | Admin menu |
+| `remove_student` | `student_id`: String | `True` if removed and saved; `False` if not found | Admin menu |
+| `clear_all_students` | None | `None`; clears saved student records | Admin menu |
 
 ## CLIUniApp (owner: Neo)
 
@@ -109,7 +129,7 @@ a new class, or methods on `Student`.
 | University (A/S/X) | | Neo |
 | Student (l/r/x) | | Neo |
 | Subject Enrolment (c/e/r/s/x) | | Yinuo |
-| Admin (c/g/p/r/s/x) | | Jeongin |
+| Admin (c/g/p/r/s/x) | `AdminSystem(database).admin_subsystem()` | Jeongin |
 | GUIUniApp | | Royce |
 
 ## Shared constants

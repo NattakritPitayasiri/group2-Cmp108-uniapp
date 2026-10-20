@@ -1,12 +1,12 @@
 import student_system
+from admin_system import AdminSystem
+from database import Database
 
 def admin_menu():
-    while True:
-        admin_action = input("  Admin System (c/g/p/r/s/x):").lower()
-        if admin_action == "x":
-            break
-        else:
-            print("Please select Admin Action again") ##TBC Jeongin
+    database = Database()
+    admin = AdminSystem(database)
+    admin.admin_subsystem()
+
 
 def student_menu():
     while True:
@@ -20,7 +20,7 @@ def student_menu():
             print("Student Sign In")
             student_system.login()
         else:
-            print("TBC") ##TBC Yinou
+            print("Invalid choice. Please try again")
         
 
 def main(): ## Neo Only
