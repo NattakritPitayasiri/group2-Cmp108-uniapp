@@ -84,7 +84,7 @@ def register():
 def subject_detail(subject):
     detail_window = tk.Toplevel(window)
     detail_window.title("Subject Detail")
-    detail_window.gemoetry("400x300")
+    detail_window.geometry("400x300")
 
     tk.Label(detail_window, text = "Subject Detail").pack()
     tk.Label(detail_window, text = f"Subject ID: {subject.subject_id}").pack()
@@ -121,8 +121,10 @@ def enrolment(student):
         enrol_in_subject(student)
         Subject_label.config(text = f"Enrolled Subjects: {student.count_subjects()} /4")
         messagebox.showinfo("Enrolment Successful", "Successful")
-
+        show_subjects()
+        
     tk.Button(enrolment_window, text = "Enrol Subject", command = enrol_subject).pack()
+
     
     def view_subjects():
         subjects = student.view_enrolment_list()
