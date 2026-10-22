@@ -92,9 +92,4 @@ Admin menu to the `Database` and wrote the class details in `docs/interfaces.md`
 
 ### Royce
 
-Wrote the `Database` class that stores all students in `students.data` with `pickle`. It creates the
-file when it is missing, reads an empty file as an empty list, and finds the file by its own location
-so the CLI and the GUI always use the same file. Designed the GUI wireframes and wrote
-`gui_uni_app.py` with Tkinter: a login window, a register window, an enrolment window, a subject window,
-and message boxes for errors. The GUI reuses the CLI code, so the CLI and the GUI work on the same
-students. Tested that a student made in the CLI can log in to the GUI and the other way round.
+I developed the `Database` class using `pickle` to save and read student data in `students.data`. The database can create the file if it does not exist and return an empty list if the file is empty. I also fixed the file path to make sure the CLI and GUI use the same database. I designed the GUI wireframes and developed `gui_uni_app.py` using Tkinter, including login, registration, enrolment, subject details, and error messages. I also integrated the GUI with the existing CLI functions so both systems can share the same student data. Finally, I tested the integration between the CLI, GUI, and database by registering accounts, logging in, and managing subject enrolments through both interfaces. The functions worked successfully during testing.
