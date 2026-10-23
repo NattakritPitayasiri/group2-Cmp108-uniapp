@@ -74,21 +74,11 @@ and wrote the shared docs (sample I/O, decisions, marking checklist), this READM
 
 ### Yinuo
 
-Wrote `subject_enrolment.py`, the Student Course menu that opens after login. A student can enrol in
-up to four subjects, and each new subject gets a random id that is not used by any other student.
-A student can remove a subject by id (the id is checked first), show the enrolled subjects, and
-change their password with a confirm step that repeats until both entries match. Every change is
-saved back to `students.data`. Added error handling for a fifth subject, a bad or unknown subject id
-and invalid menu options, and matched the menu wording to the sample output.
+Wrote subject_enrolment.py, which provides the Student Course Menu after a student logs in. From this menu, students can enrol in up to four subjects, view their enrolled subjects, remove a subject using its three-digit ID, and change their password with a confirmation step. When a student enrols in a subject, the program checks the saved student data to make sure the generated subject ID is unique. Enrolment, removal and password changes are saved to students.data. Added error handling for invalid menu choices, incorrect or unknown subject IDs, attempts to enrol in a fifth subject and password mismatches, and matched the course menu output to the assignment samples.
 
 ### Jeongin
 
-Wrote the `Student` and `Subject` classes and the Admin system. `Student` holds up to four subjects
-and can enrol, remove, count and list them, change the password, and work out the average mark, the
-overall grade and PASS or FAIL. `Subject` makes a random 3 digit id and a random mark from 25 to 100
-and works out the grade. `AdminSystem` lists all students, groups them by grade, splits them into
-PASS and FAIL, removes a student by id, and clears the file after a Y or N check. Connected the
-Admin menu to the `Database` and wrote the class details in `docs/interfaces.md`.
+Wrote the Student and Subject classes and the AdminSystem. Student checks the four-subject limit during enrolment and can enrol, remove, count and list subjects, change the password, and calculate the average mark, overall grade and PASS or FAIL status. Subject generates a random three-digit ID and a random mark from 25 to 100, then calculates the grade. AdminSystem lists all students, groups them by grade, splits them into PASS and FAIL, removes a student by ID, and clears all student records after confirmation. Connected AdminSystem to the Database and the University menu, and documented the classes in docs/interfaces.md.
 
 ### Royce
 
