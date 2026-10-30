@@ -1,14 +1,9 @@
 import tkinter as tk
 from tkinter import messagebox, simpledialog
-import sys
-from pathlib import Path
 
-sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
-sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "cli"))
-
-from cli.database import Database
-from cli.student_system import (verify_patterns, generate_student_id, is_id_taken, create_student)
-from cli.subject_enrolment import enrol_in_subject, save_student
+from model.database import Database
+from controller.student_system import (verify_patterns, generate_student_id, is_id_taken, create_student)
+from controller.subject_enrolment import enrol_in_subject, save_student
 
 window = tk.Tk()
 

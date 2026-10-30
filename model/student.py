@@ -1,4 +1,4 @@
-from subject import Subject
+from model.subject import Subject
 
 
 class Student:

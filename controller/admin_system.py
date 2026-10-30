@@ -124,7 +124,7 @@ class AdminSystem:
 
 
 if __name__ == "__main__":
-    from database import Database
+    from model.database import Database
 
     database = Database()
     admin = AdminSystem(database)

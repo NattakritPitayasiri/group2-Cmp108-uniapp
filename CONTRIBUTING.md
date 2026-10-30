@@ -49,7 +49,7 @@ git merge main
 
 # 5. Save your work
 git status                        # see what changed
-git add cli/the_file_you_changed.py
+git add controller/the_file_you_changed.py
 git commit -m "Add enrol option to course menu"
 
 # 6. Upload it

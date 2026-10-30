@@ -1,6 +1,6 @@
-import student_system
-from admin_system import AdminSystem
-from database import Database
+import controller.student_system
+from controller.admin_system import AdminSystem
+from model.database import Database
 
 def admin_menu():
     database = Database()
@@ -15,10 +15,10 @@ def student_menu():
             break
         elif student_action == "r":
             print("Student Sign Up")
-            student_system.register()
+            controller.student_system.register()
         elif student_action == "l":
             print("Student Sign In")
-            student_system.login()
+            controller.student_system.login()
         else:
             print("Invalid choice. Please try again")
         

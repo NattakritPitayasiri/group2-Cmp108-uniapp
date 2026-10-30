@@ -1,8 +1,8 @@
 import re
 import random
-from student import Student
-from database import Database
-from subject_enrolment import course_menu
+from model.student import Student
+from model.database import Database
+from controller.subject_enrolment import course_menu
 
 EMAIL_PATTERN = r"[a-z0-9_]+(\.?[a-z0-9]+)?@university\.com"
 PASSWORD_PATTERN = r"[A-Z][a-zA-Z]{5,}\d{3,}"
@@ -24,7 +24,7 @@ def email_login():
             print("email and password formats acceptable")
             return email, password
         else:
-            print("Incorrect email or password format")
+            print("Incorrect email or password format, please type again")
 
 
 def generate_student_id():

@@ -16,40 +16,44 @@ A university system with a command-line app (CLIUniApp) for students and admins,
 
 ## How to run
 
-Run both apps from the project folder.
+Run both apps from the project folder (the folder that holds `model/`, `view/` and `controller/`).
+The `-m` flag is needed so Python can find the three folders.
 
 ```bash
 # CLIUniApp
-python3 cli/cli_uni_app.py
+python3 -m controller.cli_uni_app
 
 # GUIUniApp
-python3 gui/gui_uni_app.py
+python3 -m view.gui_uni_app
 ```
 
-- Both apps read and write the same file, `cli/students.data`. It is created automatically the
+- Both apps read and write the same file, `model/students.data`. It is created automatically the
   first time you run either app. A student registered in the CLI can log in to the GUI, and the
   other way round.
-- To start again with no students, delete `cli/students.data`, or use the Admin menu (`A`, then `c`, then `Y`).
+- To start again with no students, delete `model/students.data`, or use the Admin menu (`A`, then `c`, then `Y`).
 - Admins do not log in. Choose `A` in the University menu to open the Admin menu.
 
 ## Project layout
 
+The code follows Model, View, Controller (MVC).
+
 | Folder | What's in it |
 |---|---|
-| `cli/` | CLIUniApp |
-| `gui/` | GUIUniApp |
-| `docs/` | Brief, sample I/O, marking checklist, decisions, shared interfaces |
+| `model/` | Model classes: `Student`, `Subject`, `Database` |
+| `controller/` | CLIUniApp menus. They take input and use the model classes |
+| `view/` | GUIUniApp windows |
+| `docs/` | Brief, sample I/O, marking checklist, decisions, shared interfaces, GUI plan |
 
 | File | What it does |
 |---|---|
-| `cli/cli_uni_app.py` | Entry point. University menu and Student menu |
-| `cli/student_system.py` | Register and login, email and password patterns |
-| `cli/subject_enrolment.py` | Student Course menu: enrol, remove, show subjects, change password |
-| `cli/admin_system.py` | Admin menu: list, group by grade, PASS/FAIL, remove, clear |
-| `cli/student.py` | `Student` class |
-| `cli/subject.py` | `Subject` class |
-| `cli/database.py` | `Database` class, reads and writes `students.data` with `pickle` |
-| `gui/gui_uni_app.py` | Tkinter GUI. Reuses the files in `cli/` |
+| `controller/cli_uni_app.py` | CLIUniApp entry point. University menu and Student menu |
+| `controller/student_system.py` | Register and login, email and password patterns |
+| `controller/subject_enrolment.py` | Student Course menu: enrol, remove, show subjects, change password |
+| `controller/admin_system.py` | Admin menu: list, group by grade, PASS/FAIL, remove, clear |
+| `model/student.py` | `Student` class |
+| `model/subject.py` | `Subject` class |
+| `model/database.py` | `Database` class, reads and writes `students.data` with `pickle` |
+| `view/gui_uni_app.py` | GUIUniApp entry point. Tkinter GUI that uses `model/` and `controller/` |
 
 ## Work split
 

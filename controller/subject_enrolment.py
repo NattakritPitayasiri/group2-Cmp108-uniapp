@@ -1,5 +1,5 @@
-from database import Database
-from subject import Subject
+from model.database import Database
+from model.subject import Subject
 
 def is_subject_id_taken(subject_id, students):
     for saved_student in students:

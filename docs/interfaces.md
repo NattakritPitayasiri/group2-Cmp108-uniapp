@@ -10,9 +10,9 @@ Optional: controller classes (`StudentController`, `SubjectController`, ...) tha
 
 | File | Contains | Owner |
 |---|---|---|
-| `cli/student.py` | Student class | Jeongin |
-| `cli/subject.py` | Subject class | Jeongin |
-| `cli/admin_system.py` | AdminSystem class | Jeongin |
+| `model/student.py` | Student class | Jeongin |
+| `model/subject.py` | Subject class | Jeongin |
+| `controller/admin_system.py` | AdminSystem class | Jeongin |
 
 ## Proposed names from the Part 1 class diagram
 
